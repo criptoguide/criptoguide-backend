@@ -1,22 +1,18 @@
-const PORT = 8000;
-const express = require('express');
-const axios = require('axios');
-const cheerio = require('express');
+const express = require("express");
+const router = express.Router();
+
+const v1Router = require('./v1/routes');
 
 const app = express();
 
+const PORT = process.env.PORT || 3000;
 
-
-app.get('/', (req, res)=> {
-
-res.json("welcome to the api")
-
+app.get("/", (req, res)=> {
+    res.send("<h2> its working</h2>")
 })
 
-app.get('/' (req, res) => {
+app.use("/api/v1", v1Router);
 
-    axios.get()
+app.listen(PORT, ()=> {
+    console.log(`Api is listeninig on port ${PORT}`);
 })
-
-
-app.listen(PORT, ()=>console.log(`server running in ${PORT}`) )
