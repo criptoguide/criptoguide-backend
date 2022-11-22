@@ -1,7 +1,7 @@
 const express = require("express");
-const router = express.Router();
+require("./dbConnection");
 
-const v1Router = require('./v1/routes');
+const v1BusinessRouter = require('./v1/routes/businessRoutes');
 
 const app = express();
 
@@ -11,7 +11,9 @@ app.get("/", (req, res)=> {
     res.send("<h2> its working</h2>")
 })
 
-app.use("/api/v1", v1Router);
+app.use("/api/v1/business", v1BusinessRouter);
+
+
 
 app.listen(PORT, ()=> {
     console.log(`Api is listeninig on port ${PORT}`);
