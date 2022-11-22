@@ -1,8 +1,8 @@
 const express = require("express");
-require("./dbConnection");
+require("./database/dbConnection");
 const passport = require("passport");
-require("./dbUsers/passportConfig")(passport);
-require("./dbUsers/userModel");
+require("./database/dbUsers/passportConfig")(passport);
+require("./database/dbUsers/userModel");
 require("dotenv").config();
 
 
