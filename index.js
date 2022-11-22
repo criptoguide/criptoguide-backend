@@ -1,18 +1,24 @@
 const express = require("express");
 require("./dbConnection");
+const passport = require("passport");
+require("./dbUsers/passportConfig")(passport);
+require("./dbUsers/userModel");
+require("dotenv").config();
+
 
 const v1BusinessRouter = require('./v1/routes/businessRoutes');
+const v1UserRouter = require('./v1/routes/userRoutes');
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res)=> {
-    res.send("<h2> its working</h2>")
-})
+    res.render("../login.ejs")
+});
 
 app.use("/api/v1/business", v1BusinessRouter);
-
+app.use("/api/v1/auth/", v1UserRouter);
 
 
 app.listen(PORT, ()=> {
