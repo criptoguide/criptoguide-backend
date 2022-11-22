@@ -6,8 +6,11 @@ require("./database/dbUsers/userModel");
 require("dotenv").config();
 
 
+//routes 
 const v1BusinessRouter = require('./v1/routes/businessRoutes');
 const v1UserRouter = require('./v1/routes/userRoutes');
+const v1UserAdminRoutes = require("./v1/routes/userAdminRoutes");
+
 
 const app = express();
 
@@ -17,8 +20,13 @@ app.get("/", (req, res)=> {
     res.render("../login.ejs")
 });
 
+
+
+
 app.use("/api/v1/business", v1BusinessRouter);
-app.use("/api/v1/auth/", v1UserRouter);
+app.use("/api/v1/auth", v1UserRouter);
+
+app.use("api/v1/admin", v1UserAdminRoutes);
 
 
 app.listen(PORT, ()=> {
