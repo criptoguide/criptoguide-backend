@@ -38,14 +38,14 @@ router.get(
     passport.authenticate("google", { scope: ["email", "profile"] })
   );
 
-  // Retrieve user data using the access token received 
-  router.get(
-    "/google/callback",
-    passport.authenticate("google", { session: false }),
-    (req, res) => {
-      res.redirect("/profile");
-    }
-  );
+  // Retrieve user data using the access token received , this was before using JWT 
+  // router.get(
+  //   "/google/callback",
+  //   passport.authenticate("google", { session: false }),
+  //   (req, res) => {
+  //     res.redirect("/api/v1/auth/profile");
+  //   }
+  // );
 
 // profile route after successful sign in
 
@@ -54,7 +54,7 @@ router.get(
     passport.authenticate("jwt",{ session: false }),
     (req, res, next) => {
 res.send(`welcome, ${req.user.google.name.toUpperCase()}!`)
-console.log(req.user)
+
     }
   );
 
