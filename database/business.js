@@ -1,6 +1,7 @@
 const { json } = require("express");
 const Business = require("../database/dbBusiness/businessModel");
 const DB = require("./db.json");
+const mongoose = require("mongoose");
 
 
 const getAllBusinesses = async (filterParams) => {
@@ -32,33 +33,33 @@ const getAllBusinesses = async (filterParams) => {
 
     } catch (error) {
 
-        throw new Error({ status: 500, message: error })
+        res.status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } })
     }
 
 }
 
 
-const createBusiness = async (business) => {
+const createBusiness =  (business) => {
 
     try {
-
         console.log('Creating new business...');
         const newBusiness = new Business({
-            // add the rest of the schema
-            // add the rest of the schema
             // add the rest of the schema  ** name, location, address, description, category, lat, long, poc, lang
             name: business.name,
             location: business.location,
+            poc: business.poc,
+
 
         });
 
-        await newBusiness.save();
-        return;
+     return newBusiness.save().then(()=> console.log("sucess!!"));
     } catch (error) {
-        throw new Error({ status: 500, message: error })
+        return error;
     }
-}
 
+
+}
 
 const deleteBusiness = async (businessId) => {
     try {
@@ -67,7 +68,7 @@ const deleteBusiness = async (businessId) => {
 
         return;
     } catch (error) {
-
+        return error;
     }
 }
 

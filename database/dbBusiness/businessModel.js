@@ -35,7 +35,8 @@ const BusinessSchema = new Schema({
     type: Number,
   },
   poc: {
-    type: Number,
+    type: String,
+    required: true,
   }
 
 });

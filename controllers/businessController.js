@@ -1,3 +1,4 @@
+const Business = require("../database/dbBusiness/businessModel");
 const businessService = require("../services/businessService")
 
 
@@ -20,20 +21,25 @@ const getAllBusinesses = async (req, res) => {
 }
 
 const createBusiness = async (req, res) => {
+    const { name, location, category } = req.body; // add
 
     try {
         //ADD MORE VALIDATIONS
 
         // !req.body.category || !req.body.address || !req.body.lat || !req.body.long || !req.body.poc || !req.body.description || id ??
-        if (!req.body.name || !req.body.location) {
+
+        if (!name || !location) {
             throw new Error("missing data");
         };
-        //ADD MORE VALIDATIONS
-        if (req.body.name != " " || req.body.location != " ") {
-            await businessService.createBusiness(req.body);
-            res.send({ status: "OK" })
+        // ADD MORE VALIDATIONS
+
+        if (name != " " || location != " ") {
+           await businessService.createBusiness(req.body)
+            res.status(200).send({ status: "OK"})
         }
+
     } catch (error) {
+
         res.status(error?.status || 500)
             .send({ status: "FAILED", data: { error: error?.message || error } })
     }

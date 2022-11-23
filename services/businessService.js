@@ -10,19 +10,22 @@ const getAllBusinesses = async (filterParams) => {
         const allBusinesses = await BusinessDB.getAllBusinesses(filterParams);
         return allBusinesses;
     } catch (error) {
-        throw new Error;
+        res.status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } })
     }
 
 }
 
-const createBusiness = async (business) => {
+const createBusiness = (business) => {
+
     try {
 
-        await BusinessDB.createBusiness(business);
-
+     return BusinessDB.createBusiness(business);
+ 
     } catch (error) {
-        throw new Error;
+        return error;
     }
+
 }
 
 
@@ -31,7 +34,8 @@ const deleteBusiness = async (id) => {
     try {
         await BusinessDB.deleteBusiness(id);
     } catch (error) {
-        throw new Error;
+        throw error;
+
     }
 }
 
