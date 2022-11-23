@@ -17,7 +17,6 @@ router.put("/add", passport.authenticate("jwt", { session: false }),
     async (req, res, next) => {
 
         try {
-
             // Extract userem> 
 
             let existingUser = await User.findOneAndUpdate({ 'google.id': req.user.google.id }, { 'google.data': req.body.data }, { new: true });

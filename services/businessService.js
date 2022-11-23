@@ -1,5 +1,6 @@
 // we'll be handling our api logic like transforming data structures and communicating with our Database Layer.
-const Businesses = require("../database/business")
+
+const Business = require("../database/dbBusiness/businessModel");
 
 
 const getAllBusinesses = (filterParams) => {
@@ -16,8 +17,31 @@ const getAllBusinesses = (filterParams) => {
 }
 
 
+const createBusiness = async (business) => {
+
+    try {
+
+        console.log('Creating new business...');
+        const newBusiness = new Business({
+            business: {
+                name: business.name,
+
+            }
+
+        });
+
+        await newBusiness.save();
+        return;
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 
 
 module.exports = {
-    getAllBusinesses
+    getAllBusinesses,
+    createBusiness,
 }
