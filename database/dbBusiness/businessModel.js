@@ -3,8 +3,11 @@ const bcrypt = require("bcryptjs");
 const {Schema} = moongose;
 
 const BusinessSchema = new Schema({
-    business: {
+ 
       id: {
+        type: String,
+      },
+      lang: {
         type: String,
       },
       name: {
@@ -13,12 +16,17 @@ const BusinessSchema = new Schema({
       },
       location: {
         type:String,
+        required: true,
       },
       address: {
         type: String,
       },
       description: {
         type: String,
+      },
+      category: {
+        type:String,
+
       },
       lat: {
         type: Number,
@@ -29,7 +37,7 @@ const BusinessSchema = new Schema({
       poc: {
         type: Number,
       }
-    },
+ 
 });
 
 const Business = moongose.model('Business', BusinessSchema);

@@ -4,8 +4,9 @@
             "id": 1,
             "name": "Einti",
             "country":[ {
-                "lang": "españa",
-                "lang": "spain"
+                "es": "españa",
+                "en": "spain"
+ 
             }],
 
             "city": "Zaragoza",
@@ -18,8 +19,8 @@
             "id": 2,
             "name": "Quinu",
             "country":[ {
-                "lang": "españa",
-                "lang": "spain"
+                "es": "españa",
+                "en": "spain"
             }],
             "city": "Almeria",
             "location": "52 Namekagon Road",

@@ -7,8 +7,6 @@ const passport = require("passport");
 router.get("/", businessController.getAllBusinesses)
 
 
-
-
 router.post("/create",passport.authenticate("jwt", { session: false }), businessController.createBusiness)
 
 module.exports = router;

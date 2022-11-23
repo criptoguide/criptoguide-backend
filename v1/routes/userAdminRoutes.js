@@ -6,10 +6,6 @@ const router = express.Router();
 const User = require("../../database/dbUsers/userModel");
 
 
-router.get("/", (req, res) => {
-    res.send("HOLAA ")
-});
-
 
 
 router.put("/add", passport.authenticate("jwt", { session: false }),

@@ -1,44 +1,39 @@
-
-const { filter } = require("domutils");
-const { response } = require("express");
+const { json } = require("express");
+const Business = require("../database/dbBusiness/businessModel");
 const DB = require("./db.json");
 
-const getAllBusinesses = (filterParams) => {
+
+const getAllBusinesses = async (filterParams) => {
 
     try {
 
-        let business = DB.businesses;
-        if (filterParams.location) {
-            return DB.businesses.filter((business) =>
-                business.city.toLowerCase().includes(filterParams.location)
-            );
+        let business = await Business.find();
+
+        if (!business) {
+            throw error;
         }
-        //         if(filterParams.country) {
 
+        if (filterParams.lang) {
+            return business.filter((bs) => bs.location.toLowerCase().includes(filterParams.lang))
+        }//check 
 
-        //             return DB.businesses.filter((business) => 
+        if (filterParams.location) {
+            return business.filter((bs) => bs.location.toLowerCase().includes(filterParams.location))
+        }
+        if (filterParams.country) {
+            return business.filter((bs) => bs.location.toLowerCase().includes(filterParams.country))
+        }
 
-        // //business.country.filter(business => business.toLowerCase().includes(filterParams.country))
-        //             );
-        //         }
-
-        // Other if-statements will go here for different parameters
-
-
-        if(filterParams.lang && filterParams.country) {
-          
-            return DB.businesses.filter((business) => {
-            return {...business, }
-            })
-
+        if (filterParams.category) {
+            return business.filter((bs) => bs.location.toLowerCase().includes(filterParams.category))
         }
 
         return business;
+
     } catch (error) {
 
         throw ({ status: 500, message: error })
     }
 
 }
-
 module.exports = { getAllBusinesses }

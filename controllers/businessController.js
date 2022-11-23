@@ -1,14 +1,13 @@
 const businessService = require("../services/businessService")
 
 
-const getAllBusinesses = (req, res) => {
 
+const getAllBusinesses = async (req, res) => {
 
-    const { location, country, lang } = req.query;
+    const { location, country, lang, category } = req.query;
 
     try {
-
-        const allBusinesses = businessService.getAllBusinesses({ location, country, lang });
+        const allBusinesses = await businessService.getAllBusinesses({ location, country, lang, category });
         res.send({ status: "OK", data: allBusinesses });
     }
 
@@ -24,12 +23,13 @@ const createBusiness = async (req, res) => {
 
     try {
         //ADD MORE VALIDATIONS
-        //  !req.body.location || !req.body.address || !req.body.lat || !req.body.long || !req.body.poc || !req.body.description || id ??
-        if (!req.body.name) {
+
+        // !req.body.category || !req.body.address || !req.body.lat || !req.body.long || !req.body.poc || !req.body.description || id ??
+        if (!req.body.name || !req.body.location) {
             throw new Error("missing data");
         };
         //ADD MORE VALIDATIONS
-        if (req.body.name != " ") {
+        if (req.body.name != " " || req.body.location != " ") {
             await businessService.createBusiness(req.body);
             res.send({ status: "OK" })
         }
