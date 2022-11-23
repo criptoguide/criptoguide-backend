@@ -28,15 +28,5 @@ router.put("/add", passport.authenticate("jwt", { session: false }),
 
 
 
-//   router.get(
-//     "/profile",
-//     passport.authenticate("jwt",{ session: false }),
-//     (req, res, next) => {
-// res.send(`welcome, ${req.user.google.name.toUpperCase()}!`)
-
-//     }
-//   );
-
-
 
 module.exports = router;

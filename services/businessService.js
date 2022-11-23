@@ -10,36 +10,34 @@ const getAllBusinesses = async (filterParams) => {
         const allBusinesses = await BusinessDB.getAllBusinesses(filterParams);
         return allBusinesses;
     } catch (error) {
-        throw error;
+        throw new Error;
     }
 
 }
 
 const createBusiness = async (business) => {
     try {
-        console.log('Creating new business...');
-        const newBusiness = new Business({
-            // add the rest of the schema
-            // add the rest of the schema
-            // add the rest of the schema  ** name, location, address, description, category, lat, long, poc, lang
-            name: business.name,
-            location: business.location,
 
-
-        });
-
-        await newBusiness.save();
-        return;
+       await BusinessDB.createBusiness(business);
 
     } catch (error) {
-        throw error;
+        throw new Error;
     }
 }
 
 
+const deleteBusiness = async (id) => {
+
+    try {
+await BusinessDB.deleteBusiness(id);
+    }catch(error){
+     throw new Error;
+    }
+}
 
 
 module.exports = {
     getAllBusinesses,
     createBusiness,
+    deleteBusiness
 }

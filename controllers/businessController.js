@@ -41,8 +41,39 @@ const createBusiness = async (req, res) => {
 }
 
 
+const deleteBusiness = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        await businessService.deleteBusiness(id);
+
+        res.status(200).send({ status: "OK" });
+
+    } catch (error) {
+        res.status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } })
+
+    }
+
+}
+
+
+// delete a cause
+// export function deleteCause(req, res) {
+//     const id = req.params.causeId;
+//     Cause.findByIdAndRemove(id)
+//       .exec()
+//       .then(()=> res.status(204).json({
+//         success: true,
+//       }))
+//       .catch((err) => res.status(500).json({
+//         success: false,
+//       }));
+//   }
+
 
 module.exports = {
     getAllBusinesses,
-    createBusiness
+    createBusiness,
+    deleteBusiness
 }

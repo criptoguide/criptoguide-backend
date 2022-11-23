@@ -10,7 +10,7 @@ const getAllBusinesses = async (filterParams) => {
         let business = await Business.find();
 
         if (!business) {
-            throw error;
+            throw new Error;
         }
 
         if (filterParams.lang) {
@@ -32,8 +32,43 @@ const getAllBusinesses = async (filterParams) => {
 
     } catch (error) {
 
-        throw ({ status: 500, message: error })
+        throw new Error({ status: 500, message: error })
     }
 
 }
-module.exports = { getAllBusinesses }
+
+
+const createBusiness = async (business)=> {
+
+    try {
+
+        console.log('Creating new business...');
+        const newBusiness = new Business({
+            // add the rest of the schema
+            // add the rest of the schema
+            // add the rest of the schema  ** name, location, address, description, category, lat, long, poc, lang
+            name: business.name,
+            location: business.location,
+    
+        });
+    
+        await newBusiness.save();
+        return;
+    }catch(error){
+        throw new Error({status: 500, message: error})
+    }
+}
+
+
+const deleteBusiness =  async (businessId)=> {
+    try {
+
+       await Business.findByIdAndDelete(businessId);
+
+       return;
+    }catch(error){
+
+    }
+}
+
+module.exports = { getAllBusinesses, createBusiness, deleteBusiness }
