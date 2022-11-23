@@ -1,43 +1,43 @@
 const moongose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const {Schema} = moongose;
+const { Schema } = moongose;
 
 const BusinessSchema = new Schema({
- 
-      id: {
-        type: String,
-      },
-      lang: {
-        type: String,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      location: {
-        type:String,
-        required: true,
-      },
-      address: {
-        type: String,
-      },
-      description: {
-        type: String,
-      },
-      category: {
-        type:String,
 
-      },
-      lat: {
-        type: Number,
-      },
-      long: {
-        type: Number,
-      },
-      poc: {
-        type: Number,
-      }
- 
+  id: {
+    type: String,
+  },
+  lang: {
+    type: String,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  location: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  category: {
+    type: String,
+
+  },
+  lat: {
+    type: Number,
+  },
+  long: {
+    type: Number,
+  },
+  poc: {
+    type: Number,
+  }
+
 });
 
 const Business = moongose.model('Business', BusinessSchema);
