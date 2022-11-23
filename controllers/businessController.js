@@ -21,7 +21,7 @@ const getAllBusinesses = async (req, res) => {
 
 const createBusiness = async (req, res) => {
 
-    try 
+    try {
         //ADD MORE VALIDATIONS
 
         // !req.body.category || !req.body.address || !req.body.lat || !req.body.long || !req.body.poc || !req.body.description || id ??
