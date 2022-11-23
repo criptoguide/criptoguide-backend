@@ -18,7 +18,7 @@ const getAllBusinesses = async (filterParams) => {
 const createBusiness = async (business) => {
     try {
 
-       await BusinessDB.createBusiness(business);
+        await BusinessDB.createBusiness(business);
 
     } catch (error) {
         throw new Error;
@@ -29,9 +29,9 @@ const createBusiness = async (business) => {
 const deleteBusiness = async (id) => {
 
     try {
-await BusinessDB.deleteBusiness(id);
-    }catch(error){
-     throw new Error;
+        await BusinessDB.deleteBusiness(id);
+    } catch (error) {
+        throw new Error;
     }
 }
 
