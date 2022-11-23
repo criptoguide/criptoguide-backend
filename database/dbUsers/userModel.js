@@ -1,5 +1,4 @@
 const moongose = require("mongoose");
-const bcrypt = require("bcryptjs");
 const {Schema} = moongose;
 
 const UserSchema = new Schema({
