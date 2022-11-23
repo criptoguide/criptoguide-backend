@@ -38,7 +38,7 @@ const getAllBusinesses = async (filterParams) => {
 }
 
 
-const createBusiness = async (business)=> {
+const createBusiness = async (business) => {
 
     try {
 
@@ -49,24 +49,24 @@ const createBusiness = async (business)=> {
             // add the rest of the schema  ** name, location, address, description, category, lat, long, poc, lang
             name: business.name,
             location: business.location,
-    
+
         });
-    
+
         await newBusiness.save();
         return;
-    }catch(error){
-        throw new Error({status: 500, message: error})
+    } catch (error) {
+        throw new Error({ status: 500, message: error })
     }
 }
 
 
-const deleteBusiness =  async (businessId)=> {
+const deleteBusiness = async (businessId) => {
     try {
 
-       await Business.findByIdAndDelete(businessId);
+        await Business.findByIdAndDelete(businessId);
 
-       return;
-    }catch(error){
+        return;
+    } catch (error) {
 
     }
 }
