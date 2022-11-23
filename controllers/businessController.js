@@ -21,7 +21,7 @@ const getAllBusinesses = async (req, res) => {
 
 const createBusiness = async (req, res) => {
 
-    try {
+    try 
         //ADD MORE VALIDATIONS
 
         // !req.body.category || !req.body.address || !req.body.lat || !req.body.long || !req.body.poc || !req.body.description || id ??
@@ -57,19 +57,6 @@ const deleteBusiness = async (req, res) => {
 
 }
 
-
-// delete a cause
-// export function deleteCause(req, res) {
-//     const id = req.params.causeId;
-//     Cause.findByIdAndRemove(id)
-//       .exec()
-//       .then(()=> res.status(204).json({
-//         success: true,
-//       }))
-//       .catch((err) => res.status(500).json({
-//         success: false,
-//       }));
-//   }
 
 
 module.exports = {
