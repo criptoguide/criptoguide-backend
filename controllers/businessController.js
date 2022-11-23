@@ -24,7 +24,7 @@ const createBusiness = async (req, res) => {
 
     try {
         //ADD MORE VALIDATIONS
-        //  !req.body.address || !req.body.lat || !req.body.long || !req.body.poc || !req.body.description || id ??
+        //  !req.body.location || !req.body.address || !req.body.lat || !req.body.long || !req.body.poc || !req.body.description || id ??
         if (!req.body.name) {
             throw new Error("missing data");
         };

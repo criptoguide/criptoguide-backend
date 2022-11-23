@@ -13,20 +13,17 @@ const getAllBusinesses = (filterParams) => {
         throw error;
     }
 
-
 }
 
 
 const createBusiness = async (business) => {
-
     try {
-
         console.log('Creating new business...');
         const newBusiness = new Business({
             business: {
                 name: business.name,
 
-            }
+          }
 
         });
 
