@@ -28,7 +28,7 @@ app.get("/", (req, res)=> {
 app.use("/api/v1/business", v1BusinessRouter);
 app.use("/api/v1/auth", v1UserRouter);
 
-app.use("/api/v1/admin/", v1UserAdminRoutes);
+app.use("/api/v1/admin", v1UserAdminRoutes);
 
 
 app.listen(PORT, ()=> {

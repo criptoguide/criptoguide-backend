@@ -1,4 +1,4 @@
-const { json } = require("express");
+
 const Business = require("../database/dbBusiness/businessModel");
 const DB = require("./db.json");
 const mongoose = require("mongoose");
@@ -48,7 +48,7 @@ const createBusiness =  (business) => {
             // add the rest of the schema  ** name, location, address, description, category, lat, long, poc, lang
             name: business.name,
             location: business.location,
-            poc: business.poc,
+            poc: business.POC,
 
 
         });

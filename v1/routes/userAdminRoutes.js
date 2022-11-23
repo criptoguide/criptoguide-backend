@@ -4,8 +4,9 @@ const passport = require("passport");
 require("../../database/dbUsers/passportConfig")
 const router = express.Router();
 const User = require("../../database/dbUsers/userModel");
+const userAdminController = require("../../controllers/userAdminController")
 
-
+router.get("/listings", passport.authenticate("jwt", { session: false }), userAdminController.getUserAdminBusinesses);
 
 
 router.put("/add", passport.authenticate("jwt", { session: false }),

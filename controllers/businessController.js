@@ -21,8 +21,9 @@ const getAllBusinesses = async (req, res) => {
 }
 
 const createBusiness = async (req, res) => {
-    const { name, location, category } = req.body; // add
+    const { name, location, category, lat, long, poc, description } = req.body; // add
 
+    const POC = req.user._id.toString();
     try {
         //ADD MORE VALIDATIONS
 
@@ -34,7 +35,7 @@ const createBusiness = async (req, res) => {
         // ADD MORE VALIDATIONS
 
         if (name != " " || location != " ") {
-           await businessService.createBusiness(req.body)
+           await businessService.createBusiness({name, location, category, lat, long, description, POC})
             res.status(200).send({ status: "OK"})
         }
 
