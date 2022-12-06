@@ -12,7 +12,7 @@ const BusinessSchema = new Schema({
   },
   translation:[
   {
-    language: String,
+    lang: String,
       name: String,
       description: String,
     }
