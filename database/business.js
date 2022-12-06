@@ -14,10 +14,7 @@ const getAllBusinesses = async (filterParams) => {
             throw new Error;
         }
 
-        if (filterParams.lang) {
-            return business.filter((bs) => bs.location.toLowerCase().includes(filterParams.lang))
-        }//check 
-
+ 
         if (filterParams.location) {
             return business.filter((bs) => bs.location.toLowerCase().includes(filterParams.location))
         }
@@ -29,7 +26,16 @@ const getAllBusinesses = async (filterParams) => {
             return business.filter((bs) => bs.location.toLowerCase().includes(filterParams.category))
         }
 
-        return business;
+        // ADD || 'eng'
+        
+      if(filterParams.lang){
+
+
+
+      }  
+
+
+      return business;
 
     } catch (error) {
 
@@ -40,20 +46,21 @@ const getAllBusinesses = async (filterParams) => {
 }
 
 
-const createBusiness =  (business) => {
+const createBusiness = (business) => {
 
     try {
         console.log('Creating new business...');
         const newBusiness = new Business({
-            // add the rest of the schema  ** name, location, address, description, category, lat, long, poc, lang
+            // add the rest of the schema  ** name, location, translation, address, description, category, lat, long, poc, lang
             name: business.name,
             location: business.location,
             poc: business.POC,
+            translation: business.translation,
 
 
         });
 
-     return newBusiness.save().then(()=> console.log("sucess!!"));
+        return newBusiness.save().then(() => console.log("sucess!!"));
     } catch (error) {
         return error;
     }
@@ -61,14 +68,24 @@ const createBusiness =  (business) => {
 
 }
 
-const deleteBusiness = async (businessId) => {
+const deleteBusiness = async (params) => {
     try {
 
-        await Business.findByIdAndDelete(businessId);
+        Business.findById({ _id: params.id }, async function (error, bs) {
+            if (error) {
+                console.log(error)
+            } else if (bs.poc === params.POC) {
+                console.log('deleting...');
+                Business.findByIdAndDelete(params.id).exec().catch((err) => console.log(err));
+                // return console.log("successfuly  deleted");
+            } else {
+                return;
+            }
+        })
 
-        return;
+
     } catch (error) {
-        return error;
+        throw Error;
     }
 }
 
