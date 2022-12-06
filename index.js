@@ -19,7 +19,7 @@ app.use(bp.urlencoded({ extended: true }))
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res)=> {
-    res.render("../login.ejs")
+   res.render("../login.ejs")
 });
 
 

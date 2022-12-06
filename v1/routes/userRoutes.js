@@ -46,14 +46,14 @@ router.get(
 
 // profile route after successful sign in
 
-router.get(
-    "/profile",
-    passport.authenticate("jwt",{ session: false }),
-    (req, res, next) => {
-res.send(`welcome, ${req.user.google.name.toUpperCase()}!`)
+// router.get(
+//     "/profile",
+//     passport.authenticate("jwt",{ session: false }),
+//     (req, res, next) => {
+// res.send(`welcome, ${req.user.google.name.toUpperCase()}!`)
 
-    }
-  );
+//     }
+//   );
 
 
 //logout

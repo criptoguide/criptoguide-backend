@@ -28,10 +28,10 @@ const createBusiness = (business) => {
 }
 
 
-const deleteBusiness = async (id) => {
+const deleteBusiness =  (params) => {
 
     try {
-        await BusinessDB.deleteBusiness(id);
+         BusinessDB.deleteBusiness(params);
     } catch (error) {
         throw error;
 

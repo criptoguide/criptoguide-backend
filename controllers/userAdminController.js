@@ -6,6 +6,7 @@ const userAdminService = require("../services/userAdminService")
 const getUserAdminBusinesses = async (req, res) => {
 
     const { location, country, lang, category } = req.query;
+
     let userPOC = req.user._id.toString();
 
 
