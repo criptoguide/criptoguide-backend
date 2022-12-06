@@ -10,16 +10,13 @@ const BusinessSchema = new Schema({
   lang: {
     type: String,
   },
-  translation:{
-    en: {
-      name: String,
-      description: String,
-    },
-    es: {
+  translation:[
+  {
+    language: String,
       name: String,
       description: String,
     }
-      },
+      ],
   name: {
     type: String,
     required: true,

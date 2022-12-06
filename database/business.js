@@ -28,8 +28,7 @@ const getAllBusinesses = async (filterParams) => {
 
         // ADD || 'eng'
         
-      if(filterParams.lang){
-
+      if(filterParams.lang[0].code){
 
 
       }  
