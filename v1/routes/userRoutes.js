@@ -2,8 +2,9 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 require("../../database/dbUsers/passportConfig")
-
-const jwt = require("jsonwebtoken")
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
+const config = require("../../config");
 
 
 router.get(
@@ -33,8 +34,16 @@ router.get(
 router.get(
     "/google",
     passport.authenticate("google", { scope: ["email", "profile"] }),
-    (req, res) => {
-      res.header("Access-Control-Allow-Origin", "https://localhost:3000"); 
+    (req, res, next) => {
+
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+      );
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+      next();
+   
     }
   );
 
