@@ -26,14 +26,6 @@ const getAllBusinesses = async (filterParams) => {
             return business.filter((bs) => bs.location.toLowerCase().includes(filterParams.category))
         }
 
-        // ADD || 'eng'
-        
-      if(filterParams.lang[0].code){
-
-
-      }  
-
-
       return business;
 
     } catch (error) {

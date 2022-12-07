@@ -32,7 +32,10 @@ router.get(
 // Redirect the user to the Google signin page 
 router.get(
     "/google",
-    passport.authenticate("google", { scope: ["email", "profile"] })
+    passport.authenticate("google", { scope: ["email", "profile"] }),
+    (req, res) => {
+      res.header("Access-Control-Allow-Origin", "https://localhost:3000"); 
+    }
   );
 
   // Retrieve user data using the access token received , this was before using JWT 

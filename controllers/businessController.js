@@ -1,13 +1,16 @@
 const Business = require("../database/dbBusiness/businessModel");
 const businessService = require("../services/businessService")
-
+var parser = require('accept-language-parser');
 
 
 const getAllBusinesses = async (req, res) => {
 
     const { location, country, category } = req.query;
 
-const lang = req.headers["accept-language"];
+const acceptedLanguage = req.headers["accept-language"];
+const lang = parser.parse(acceptedLanguage);
+
+
 
     try {
         const allBusinesses = await businessService.getAllBusinesses({ location, country, lang, category });
