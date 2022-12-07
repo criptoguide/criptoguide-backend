@@ -8,11 +8,11 @@ require("dotenv").config();
 
 module.exports = (passport) => {
 
-    
+
     passport.use(new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: config[process.env.NODE_ENV].passPortCallBackUrl,
+        callbackURL: `${config[process.env.NODE_ENV].passPortCallBackUrl}/api/v1/auth/google/callback`,
         passReqToCallback   : true
       },
       async (request, accessToken, refreshToken, profile, done) => {

@@ -3,10 +3,11 @@ require("./database/dbConnection");
 const passport = require("passport");
 require("./database/dbUsers/passportConfig")(passport);
 require("./database/dbUsers/userModel");
+require("dotenv").config();
 const bp = require('body-parser')
 const app = express();
 const cors = require('cors');
-
+require("dotenv").config();
 app.use(cors());
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
