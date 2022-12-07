@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 require("./dbUsers/passportConfig")
 //
 mongoose.Promise = global.Promise;
-
+mongoose.set('strictQuery', false);
 //
 require('dotenv').config();
 

@@ -1,16 +1,18 @@
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
+const config = require("../../config");
 const User = require("./userModel");
 require("dotenv").config();
 
 
 module.exports = (passport) => {
+
     
     passport.use(new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/api/v1/auth/google/callback",
+        callbackURL: config[process.env.NODE_ENV].passPortCallBackUrl,
         passReqToCallback   : true
       },
       async (request, accessToken, refreshToken, profile, done) => {
