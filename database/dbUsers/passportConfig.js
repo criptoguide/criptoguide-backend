@@ -13,7 +13,8 @@ module.exports = (passport) => {
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         callbackURL: `${config[process.env.NODE_ENV].url}/api/v1/auth/google/callback`,
-        passReqToCallback   : true
+        passReqToCallback   : true,
+        proxy:true
       },
       async (request, accessToken, refreshToken, profile, done) => {
         try {
