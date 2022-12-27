@@ -1,10 +1,10 @@
 
 const express = require("express");
 const passport = require("passport");
-require("../../database/dbUsers/passportConfig")
+require("../database/dbUsers/passportConfig")
 const router = express.Router();
-const User = require("../../database/dbUsers/userModel");
-const userAdminController = require("../../controllers/userAdminController")
+const User = require("../database/dbUsers/userModel");
+const userAdminController = require("../controllers/userAdminController")
 
 router.get("/listings", passport.authenticate("jwt", { session: false }), userAdminController.getUserAdminBusinesses);
 
