@@ -1,27 +1,38 @@
 const moongose = require("mongoose");
-const {Schema} = moongose;
+const { Schema } = moongose;
 
 const UserSchema = new Schema({
-    google: {
-      id: {
-        type: String,
-      },
-      firstName: {
-        type: String,
-      },
-      lastName: {
-        type: String,
-      },
-      picture: {
-        type: String,
-      },
-      email: {
-        type: String,
-      },
-      data: {
-        type: Array,
-      }
-    },
+
+  id: {
+    type: String,
+  },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+  picture: {
+    type: String,
+  },
+  email: {
+    type: String,
+  },
+  password: {
+    type: String,
+    minlength: 6,
+  },
+  data: {
+    type: Array,
+  },
+  createdAt: {
+    type: Date,
+  },
+  updatedAt: {
+    type: Date,
+  }
+
+
 });
 
 const User = moongose.model('User', UserSchema);
