@@ -122,7 +122,9 @@ export async function googleOAuthHandler(req, res) {
   
         // redirect back to client
 
-        res.redirect(process.env.ORIGIN_URL);
+        //res.redirect(process.env.ORIGIN_URL);
+       // res.send({"message": "deliverResult", result: 'user update/created' })
+        res.send("<script>window.close();</script > ");
 
     } catch (error) {
         console.log(error, "Failed to authorize Google user");
