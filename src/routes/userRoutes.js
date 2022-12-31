@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+import { googleOAuthHandler } from "../controllers/session.controller";
 import {verifyGoogleToken,  createNewUser } from "../services/googleAuth";
 
 
@@ -41,7 +42,8 @@ res.status(201).json({
     email: profile?.email,
     token: jwt.sign({ email: profile?.email }, process.env.JWT_SECRET_KEY, {
       expiresIn: "1h",
-    }),
+    },
+    ),
   },
 });
 
@@ -60,6 +62,9 @@ res.status(500).json({
 
 
 
+
+
+router.get('/sessions/oauth/google', googleOAuthHandler);
 
 module.exports = router;
 
