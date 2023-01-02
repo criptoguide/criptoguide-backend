@@ -19,6 +19,7 @@ const config = {
 const defaults = {
     accessTokenTtl: "15m",
     refreshTokenTtl: "1y",
+    saltWorkFactor:10,
     publicKey: 
     `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoSFmTbcW2b3LLur3ML2+

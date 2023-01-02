@@ -5,6 +5,17 @@ import qs from 'qs';
 import User from '../database/dbUsers/userModel';
 import { omit } from "lodash";
 
+
+export async function createUser(input ) {
+    try {
+      const user = await User.create(input);
+  
+      return omit(user.toJSON(), "password");
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+
 export async function validatePassword({
     email,
     password,
@@ -22,6 +33,9 @@ export async function validatePassword({
 
 };
 
+export async function findUser(query) {
+    return User.findOne(query).lean();
+  }
 
 export async function getGoogleOAuthTokens({ code }) {
 
@@ -82,3 +96,4 @@ export async function findAndUpdateUser(query,
     return User.findOneAndUpdate(query, update, options);
 
 }
+

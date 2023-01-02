@@ -1,7 +1,9 @@
 import { findAndUpdateUser, getGoogleOAuthTokens, getGoogleUser, validatePassword } from "../services/user.service";
 import jwt from 'jsonwebtoken';
-import { createSession } from "../services/session.service";
+import { createSession, findSessions, updateSession } from "../services/session.service";
 import { signJwt } from "../../utils/jwt.utils";
+import { defaults } from "../config";
+
 
 
 const accessTokenCookieOptions = {
@@ -28,13 +30,13 @@ export async function createUserSessionHandler(req, res) {
 
     const session = await createSession(user._id, req.get("user-agent") || "");
     const accessToken = signJwt(
-        {...user.toJSON(), session: session._id},
-        {expiresIn: process.env.ACCESS_TOKEN_TLIMIT}
+        {...user, session: session._id},
+        {expiresIn: defaults.accessTokenTtl}
     );
 
     const refreshToken = signJwt(
-        {...user.toJSON(), session: session._id},
-        {expiresIn:process.env.REFRESH_TOKEN_TLIMIT}
+        {...user, session: session._id},
+        {expiresIn:defaults.refreshTokenTtl}
     )
 
     // set a cookie 
@@ -48,10 +50,27 @@ export async function createUserSessionHandler(req, res) {
 }
 
 export async function getUserSessionsHandler(req, res) {
+  
 
-}
+  const userId = res.locals.user._id;
+  
+    const sessions = await findSessions({ user: userId, valid: true });
+  
+    return res.send(sessions);
+  }
+
+  
+  
 export async function deleteSessionHandler(req, res) {
 
+    const sessionId = res.locals.user.session;
+
+    await updateSession({ _id: sessionId }, { valid: false });
+  
+    return res.send({
+      accessToken: null,
+      refreshToken: null,
+    });
 }
 
 
@@ -85,7 +104,7 @@ export async function googleOAuthHandler(req, res) {
             },
             {
                 email: googleUser.email,
-                first_name: googleUser.name,
+                name: googleUser.name,
                 picture: googleUser.picture,
             },
             {
@@ -93,7 +112,7 @@ export async function googleOAuthHandler(req, res) {
                 new: true,
             }
         )
-        console.log("user created...")
+        console.log("user created/updated...")
 
         //create a session
 
@@ -104,12 +123,12 @@ export async function googleOAuthHandler(req, res) {
         
         const accessToken = signJwt(
             {...user.toJSON(), session: session._id},
-            {expiresIn: process.env.ACCESS_TOKEN_TLIMIT}
+            {expiresIn: defaults.accessTokenTtl}
         );
 
         const refreshToken = signJwt(
             {...user.toJSON(), session: session._id},
-            {expiresIn:process.env.REFRESH_TOKEN_TLIMIT}
+            {expiresIn:defaults.refreshTokenTtl}
         )
  
 
