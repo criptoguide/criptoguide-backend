@@ -5,7 +5,10 @@ require("dotenv").config();
 const bp = require('body-parser')
 const app = express();
 const cors = require('cors');
+import deserializeUser from "../middleware/deserializeUser";
+const PORT = process.env.PORT || 8080;
 
+app.use(deserializeUser);
 
 app.use(
     cors({
@@ -17,26 +20,29 @@ app.use(
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: false }))
 
+
 //
 //routes 
 const v1BusinessRouter = require('./routes/businessRoutes');
-const v1UserRouter = require('./routes/userRoutes');
+const v1UserRouter = require('./routes/user.routes');
 const v1UserAdminRoutes = require("./routes/userAdminRoutes");
 
+const v1SessionsRoutes = require("./routes/sessions.routes");
 
-
-const PORT = process.env.PORT || 8080;
 
 app.get("/", (req, res)=> {
-   res.render("./src/login.ejs")
+   res.json("App working")
 });
 
 
 
 app.use("/api/v1/business", v1BusinessRouter);
-app.use("/api/v1/auth", v1UserRouter);
+app.use("/api/v1/users", v1UserRouter);
 
 app.use("/api/v1/admin", v1UserAdminRoutes);
+
+app.use("/api/v1/sessions", v1SessionsRoutes);
+
 
 
 app.listen(PORT, ()=> {

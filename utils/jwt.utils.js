@@ -14,6 +14,7 @@ export function signJwt(object, options){
 }
 
 export function verifyJwt(token) {
+  
     try {
         const decoded = jwt.verify(token, publicKey);
         return {
@@ -22,7 +23,6 @@ export function verifyJwt(token) {
             decoded,
         };
     }catch(e){
-        console.log(e);
         return {
             valid: false,
             expired: e.message === "jwt expired",
