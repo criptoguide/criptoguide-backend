@@ -20,6 +20,7 @@ const defaults = {
     accessTokenTtl: "15m",
     refreshTokenTtl: "1y",
     saltWorkFactor:10,
+    origin: "http://localhost:3000",
     publicKey: 
     `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoSFmTbcW2b3LLur3ML2+

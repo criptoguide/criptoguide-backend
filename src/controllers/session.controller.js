@@ -9,10 +9,10 @@ import { defaults } from "../config";
 const accessTokenCookieOptions = {
     maxAge: 900000, // 15 mins
     httpOnly: true,
-    domain: "localhost",
+    domain: "localhost",// SET TO CONFIG FOR PROD
     path: "/",
-    sameSite: "lax",
-    secure: false,
+    sameSite: "strict", // strict in prod  lax in dev ? 
+    secure: false, // env-dev =false) | env-prod = true
   };
   const refreshTokenCookieOptions = {
     ...accessTokenCookieOptions,
@@ -91,8 +91,6 @@ export async function googleOAuthHandler(req, res) {
 
         // get user with tokens
         const googleUser = await getGoogleUser({ id_token, access_token });   //jwt.decode(id_token); other way to ge tthe user
-
-        // CHECK THIS COS GOOGLE SHOULD NOT BE FPOUND BY EMAIL
 
         if (!googleUser.email) {
             return res.status(403).send("Google account is not verified");

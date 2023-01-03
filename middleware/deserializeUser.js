@@ -38,10 +38,10 @@ const deserializeUser = async (
       res.cookie("accessToken", newAccessToken, {
         maxAge: 900000, // 15 mins
         httpOnly: true,
-        domain: "localhost",
+        domain: "localhost", // set environment
         path: "/",
         sameSite: "strict",
-        secure: false,
+        secure: false, // set environmet to true in prod
       });
     }
 

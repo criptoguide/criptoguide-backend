@@ -3,20 +3,24 @@ require("./database/dbConnection");
 require("./database/dbUsers/userModel");
 require("dotenv").config();
 const bp = require('body-parser')
+import cookieParser from "cookie-parser";
 const app = express();
 const cors = require('cors');
 import deserializeUser from "../middleware/deserializeUser";
+import { defaults } from "./config";
 const PORT = process.env.PORT || 8080;
 
 app.use(deserializeUser);
 
 app.use(
     cors({
-      origin: ["http://localhost:3000"],
-      methods: "GET,POST,PUT,DELETE,OPTIONS",
+      origin: defaults.origin,
+      credentials: true,
     })
   );
 
+
+app.use(cookieParser);
 app.use(bp.json())
 app.use(bp.urlencoded({ extended: false }))
 
