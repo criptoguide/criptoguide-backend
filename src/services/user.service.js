@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { query } from 'express';
-require("dotenv").config();
 import qs from 'qs';
 import User from '../database/dbUsers/userModel';
 import { omit } from "lodash";

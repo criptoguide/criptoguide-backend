@@ -1,4 +1,5 @@
 import { get } from "lodash";
+import config from "../src/config";
 import { reIssueAccessToken } from "../src/services/session.service";
 import { verifyJwt } from "../utils/jwt.utils";
 
@@ -17,9 +18,12 @@ const deserializeUser = async (
     get(req, "cookies.refreshToken") || get(req, "headers.x-refresh");
 
 
-  if (!accessToken) {
-    return next();
-  }
+  // if (!accessToken) {
+  //   return next();
+  // }
+ if (!accessToken && !refreshToken) {
+  return next();
+ }
 
   const { decoded, expired } = verifyJwt(accessToken);
 
@@ -29,7 +33,7 @@ const deserializeUser = async (
     return next();
   }
 
-  if (expired && refreshToken) {
+   if ((expired && refreshToken) || (!accessToken && refreshToken)) {
     const newAccessToken = await reIssueAccessToken({ refreshToken });
 
     if (newAccessToken) {
@@ -40,8 +44,8 @@ const deserializeUser = async (
         httpOnly: true,
         domain: "localhost", // set environment
         path: "/",
-        sameSite: "strict",
-        secure: false, // set environmet to true in prod
+        sameSite: config.cookieSamSite, // lax ? dev - strict-prod
+        secure: config.cookieSecure, // set environmet to true in prod
       });
     }
 

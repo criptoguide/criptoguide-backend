@@ -1,28 +1,18 @@
-const env = process.env.NODE_ENV; // dev or prod
-require("dotenv").config();
+require('dotenv').config();
 
-const dev = {
-    url:process.env.URL_DEV,
-
-};
-
-const prod = {
-    url:process.env.URL_PROD,
-
-}
-
-const config = {
-    dev,
-    prod
-}
-
-const defaults = {
-    accessTokenTtl: "15m",
-    refreshTokenTtl: "1y",
-    saltWorkFactor:10,
-    origin: "http://localhost:3000",
-    publicKey: 
-    `-----BEGIN PUBLIC KEY-----
+module.exports = {
+    NODE_ENV: process.env.NODE_ENV || 'dev',
+    HOST : process.env.HOST || 'localhost',
+    PORT : process.env.PORT || 8080,
+    accessTokenTtl: process.env.ACCESS_TOKEN_LIMIT,
+    refreshTokenTtl: process.env.REFRESH_TOKEN_LIMIT,
+    saltWorkFactor: 10,//parseInt(process.env.SALT_WORK_FACTOR),
+    cookieDomain: process.env.COOKIE_DOMAIN,
+    cookieSamSite: process.env.COOKIE_SAMSITE,
+    cookieSecure:process.env.COOKIE_SECURE,
+    origin:  process.env.ORIGIN_URL,
+    database_connection_string: process.env.DATABASE_URL,
+    publicKey: `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoSFmTbcW2b3LLur3ML2+
 KNuc5PJ4dsi4s774zteo6fx88ZXq3PIHNdYfhO5+kHlf0C65beACxuUOGv2Q4F7M
 UGwP0kkLCzQ1f1vuFta8SvqSdMVvqIYCeRVX6ma9Fvjprmo0i6mlrRfmKlFVZJrV
@@ -31,7 +21,8 @@ IaP3GVYKV2MYMI+3PG3Ww/VpUcbwmQhg/NQcSaUqf8PQeya1HhlI3i/RqZvWjH+D
 aU1u2m95KlGevGap6dcKrMyvab4gBF7zejE/lweP6ugbmKOxqbbZLjyFQpoKXEr5
 IQIDAQAB
 -----END PUBLIC KEY-----`,
-    privateKey: `-----BEGIN PRIVATE KEY-----
+
+    privateKey:`-----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQChIWZNtxbZvcsu
 6vcwvb4o25zk8nh2yLizvvjO16jp/Hzxlerc8gc11h+E7n6QeV/QLrlt4ALG5Q4a
 /ZDgXsxQbA/SSQsLNDV/W+4W1rxK+pJ0xW+ohgJ5FVfqZr0W+OmuajSLqaWtF+Yq
@@ -58,9 +49,7 @@ z/gluVHeTC/s+ZAnN+PmMnZCEJYDy5vC+RcXVXsCgYEAzgVUVNQruJs/La6yv8lz
 87v512v9h0m7RtS/9rii15IQLNDoMFJB6ANR4erl+g3GvUQokl/skXMZwr/FKBUw
 xVxvurudvXnfhIzPNAj1Q0+7WjDqxA5ab/0x/cVeRg9HluwXr24pg3lRZvRPtW6z
 gSV3rmFa4eBE3nGlJHwEULw=
------END PRIVATE KEY-----`
-    
+-----END PRIVATE KEY-----`    
 
 }
 
-module.exports = {config, defaults};

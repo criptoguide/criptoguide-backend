@@ -1,7 +1,8 @@
 const moongose = require("mongoose");
 const { Schema } = moongose;
 import bcrypt from "bcrypt";
-import { defaults } from "../../config";
+import config from "../../config";
+
 
 const UserSchema = new Schema(
     {
@@ -25,7 +26,7 @@ UserSchema.pre("save", async function (next) {
     return next();
   }
 
-  const salt = await bcrypt.genSalt(defaults.saltWorkFactor);
+  const salt = await bcrypt.genSalt(config.saltWorkFactor);
 
   const hash = await bcrypt.hashSync(user.password, salt);
 

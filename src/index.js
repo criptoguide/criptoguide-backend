@@ -1,29 +1,27 @@
 const express = require("express");
 require("./database/dbConnection");
 require("./database/dbUsers/userModel");
-require("dotenv").config();
 const bp = require('body-parser')
-import cookieParser from "cookie-parser";
 const app = express();
 const cors = require('cors');
-import deserializeUser from "../middleware/deserializeUser";
-import { defaults } from "./config";
-const PORT = process.env.PORT || 8080;
+import cookieParser from "cookie-parser";
+const config =  require('./config.js');
 
-app.use(deserializeUser);
+const PORT = config.PORT;
+import deserializeUser from "../middleware/deserializeUser";
 
 app.use(
-    cors({
-      origin: defaults.origin,
-      credentials: true,
-    })
+  cors({
+    origin: config.origin,
+    credentials: true,
+  })
   );
+  app.use(cookieParser());
+  app.use(deserializeUser);
 
-
-app.use(cookieParser);
-app.use(bp.json())
-app.use(bp.urlencoded({ extended: false }))
-
+  app.use(bp.json())
+  app.use(bp.urlencoded({ extended: false }))
+  
 
 //
 //routes 
@@ -36,6 +34,7 @@ const v1SessionsRoutes = require("./routes/sessions.routes");
 
 app.get("/", (req, res)=> {
    res.json("App working")
+
 });
 
 

@@ -2,7 +2,8 @@ import { findAndUpdateUser, getGoogleOAuthTokens, getGoogleUser, validatePasswor
 import jwt from 'jsonwebtoken';
 import { createSession, findSessions, updateSession } from "../services/session.service";
 import { signJwt } from "../../utils/jwt.utils";
-import { defaults } from "../config";
+import config from "../config";
+
 
 
 
@@ -12,7 +13,7 @@ const accessTokenCookieOptions = {
     domain: "localhost",// SET TO CONFIG FOR PROD
     path: "/",
     sameSite: "strict", // strict in prod  lax in dev ? 
-    secure: false, // env-dev =false) | env-prod = true
+    secure: config.cookieSecure, // env-dev =false) | env-prod = true
   };
   const refreshTokenCookieOptions = {
     ...accessTokenCookieOptions,
@@ -31,12 +32,12 @@ export async function createUserSessionHandler(req, res) {
     const session = await createSession(user._id, req.get("user-agent") || "");
     const accessToken = signJwt(
         {...user, session: session._id},
-        {expiresIn: defaults.accessTokenTtl}
+        {expiresIn: config.accessTokenTtl}
     );
 
     const refreshToken = signJwt(
         {...user, session: session._id},
-        {expiresIn:defaults.refreshTokenTtl}
+        {expiresIn:config.refreshTokenTtl}
     )
 
     // set a cookie 
@@ -67,10 +68,18 @@ export async function deleteSessionHandler(req, res) {
 
     await updateSession({ _id: sessionId }, { valid: false });
   
-    return res.send({
-      accessToken: null,
-      refreshToken: null,
-    });
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    // -1 setting up request as expired and re-requesting before display again. 
+    res.header('Expires', '-1');
+    res.header('Pragma', 'no-cache');
+
+    res.clearCookie("accessToken")
+    res.clearCookie("refreshToken")
+    res.send({
+        accessToken: null,
+        refreshToken: null,
+      });
+  return res.end();
 }
 
 
@@ -121,12 +130,12 @@ export async function googleOAuthHandler(req, res) {
         
         const accessToken = signJwt(
             {...user.toJSON(), session: session._id},
-            {expiresIn: defaults.accessTokenTtl}
+            {expiresIn: config.accessTokenTtl}
         );
 
         const refreshToken = signJwt(
             {...user.toJSON(), session: session._id},
-            {expiresIn:defaults.refreshTokenTtl}
+            {expiresIn:config.refreshTokenTtl}
         )
  
 
@@ -145,7 +154,7 @@ export async function googleOAuthHandler(req, res) {
 
     } catch (error) {
         console.log(error, "Failed to authorize Google user");
-        return res.redirect(`${process.env.ORIGIN_URL}/oauth/error`);
+        return res.redirect(`${config.origin}/oauth/error`);
 
     }
 

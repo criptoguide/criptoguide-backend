@@ -1,6 +1,8 @@
+
 import { get } from "lodash";
 import { signJwt, verifyJwt } from "../../utils/jwt.utils";
-import { defaults } from "../config";
+import config from "../config";
+
 import SessionModel from "../database/dbSessions/sessions.model";
 import { findUser } from "./user.service";
 
@@ -39,8 +41,9 @@ export async function reIssueAccessToken({
 
     const accessToken = signJwt(
         { ...user, session: session._id },
-        { expiresIn: defaults.accessTokenTtl } // 15 minutes
+        { expiresIn:config.accessTokenTtl  } // 15 minutes
     );
+ 
 
     return accessToken;
 }
