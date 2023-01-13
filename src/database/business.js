@@ -14,7 +14,7 @@ const getAllBusinesses = async (filterParams) => {
             throw new Error;
         }
 
- 
+
         if (filterParams.location) {
             return business.filter((bs) => bs.location.toLowerCase().includes(filterParams.location))
         }
@@ -26,7 +26,7 @@ const getAllBusinesses = async (filterParams) => {
             return business.filter((bs) => bs.location.toLowerCase().includes(filterParams.category))
         }
 
-      return business;
+        return business;
 
     } catch (error) {
 
@@ -42,12 +42,14 @@ const createBusiness = (business) => {
     try {
         console.log('Creating new business...');
         const newBusiness = new Business({
-            // add the rest of the schema  ** name, location, translation, address, description, category, lat, long, poc, lang
-            name: business.name,
-            location: business.location,
+            id: business.id,
+            formatted_address: business.formatted_address,
+            geometry: business.geometry,
+            place_id: business.place_id,
             poc: business.POC,
-            translation: business.translation,
-
+            types: business.types,
+            url: business.url,
+            photos: business.photos,
 
         });
 

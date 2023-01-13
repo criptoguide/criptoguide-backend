@@ -3,6 +3,8 @@ const businessService = require("../services/businessService")
 var parser = require('accept-language-parser');
 
 
+
+
 const getAllBusinesses = async (req, res) => {
 
     const { location, country, category } = req.query;
@@ -25,22 +27,39 @@ const lang = parser.parse(acceptedLanguage);
 
 }
 
-const createBusiness = async (req, res) => {
-    const { name, location, category, lat, long,translation, poc, description } = req.body; // add
 
-    const POC = req.user._id.toString();
+const getUserOwnBusiness = async (req, res)=> {
+
+  const ownerUserId = res.locals.user._id;
+  
+
+  const ownerBusinesess = await businessService.getOwnBusiness(ownerUserId);
+ 
+  return res.send(ownerBusinesess);
+
+}
+
+const createBusiness = async (req, res) => {
+    const { id, formatted_address, geometry, name, place_id, types, url, photos} = req.body
+
+    console.log(req.user);
+    //const POC = req.user._id.toString();
+
+
+    const POC = res.locals.user._id.toString();
+console.log("POC", POC)
     try {
         //ADD MORE VALIDATIONS
 
         // !req.body.category || !req.body.address || !req.body.lat || !req.body.long || !req.body.poc || !req.body.description || id ??
 
-        if (!name || !location) {
+        if (!name ) {
             throw new Error("missing data");
         };
-        // ADD MORE VALIDATIONS
+       // ADD MORE VALIDATIONS
 
-        if (name != " " || location != " ") {
-           await businessService.createBusiness({name, location, category, lat,translation,  long, description, POC})
+        if (name != " ") {
+            await businessService.createBusiness({id, formatted_address, geometry, name, place_id, types, url, POC})
             res.status(200).send({ status: "OK"})
         }
 
@@ -76,6 +95,7 @@ const deleteBusiness = async (req, res) => {
 
 module.exports = {
     getAllBusinesses,
+    getUserOwnBusiness,
     createBusiness,
     deleteBusiness
 }

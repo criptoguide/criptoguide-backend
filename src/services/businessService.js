@@ -3,6 +3,9 @@
 const Business = require("../database/dbBusiness/businessModel");
 const BusinessDB = require("../database/business.js");
 
+
+
+
 const getAllBusinesses = async (filterParams) => {
 
     try {
@@ -14,6 +17,25 @@ const getAllBusinesses = async (filterParams) => {
     }
 
 }
+
+
+const getOwnBusiness = async(id) => {
+
+try{
+
+    let ownerBusinesess = Business.find({poc:id})
+
+    return ownerBusinesess;
+    
+}catch(error){
+    res.status(error?.status || 500)
+    .send({ status: "FAILED", data: { error: error?.message || error } })
+
+}
+
+
+}
+
 
 const createBusiness = (business) => {
 
@@ -41,6 +63,7 @@ const deleteBusiness =  (params) => {
 
 module.exports = {
     getAllBusinesses,
+    getOwnBusiness,
     createBusiness,
     deleteBusiness
 }
