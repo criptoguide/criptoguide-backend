@@ -1,7 +1,7 @@
 import { get } from "lodash";
-import config from "../src/config";
-import { reIssueAccessToken } from "../src/services/session.service";
-import { verifyJwt } from "../utils/jwt.utils";
+import config from "../../config/default";
+import { reIssueAccessToken } from "../services/session.service";
+import { verifyJwt } from '../utils/jwt.utils';
 
 
 const deserializeUser = async (

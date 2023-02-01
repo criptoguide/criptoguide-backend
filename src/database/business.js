@@ -1,6 +1,5 @@
 
 const Business = require("../database/dbBusiness/businessModel");
-const DB = require("./db.json");
 const mongoose = require("mongoose");
 
 

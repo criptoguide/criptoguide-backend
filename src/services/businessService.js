@@ -1,5 +1,3 @@
-// we'll be handling our api logic like transforming data structures and communicating with our Database Layer.
-
 const Business = require("../database/dbBusiness/businessModel");
 const BusinessDB = require("../database/business.js");
 

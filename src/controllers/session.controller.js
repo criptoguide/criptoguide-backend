@@ -1,8 +1,8 @@
 import { findAndUpdateUser, getGoogleOAuthTokens, getGoogleUser, validatePassword } from "../services/user.service";
 import jwt from 'jsonwebtoken';
 import { createSession, findSessions, updateSession } from "../services/session.service";
-import { signJwt } from "../../utils/jwt.utils";
-import config from "../config";
+import { signJwt } from "../utils/jwt.utils";
+import config from "../../config/default";
 
 
 

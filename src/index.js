@@ -5,10 +5,11 @@ const bp = require('body-parser')
 const app = express();
 const cors = require('cors');
 import cookieParser from "cookie-parser";
-const config =  require('./config.js');
+const config =  require('../config/default.js');
 
 const PORT = config.PORT;
-import deserializeUser from "../middleware/deserializeUser";
+import deserializeUser from "./middleware/deserializeUser";
+
 
 app.use(
   cors({

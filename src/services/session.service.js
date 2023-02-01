@@ -1,10 +1,11 @@
 
 import { get } from "lodash";
-import { signJwt, verifyJwt } from "../../utils/jwt.utils";
-import config from "../config";
+import { signJwt, verifyJwt } from '../utils/jwt.utils'
+import config from "../../config/default";
 
 import SessionModel from "../database/dbSessions/sessions.model";
 import { findUser } from "./user.service";
+
 
 
 

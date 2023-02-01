@@ -1,7 +1,7 @@
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
-const config = require("../../config");
+const config = require("../../../config/default");
 const User = require("./userModel");
 require("dotenv").config();
 
@@ -10,8 +10,8 @@ module.exports = (passport) => {
 
 
     passport.use(new GoogleStrategy({
-        clientID: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
+        clientID: config.googleClientId,
+        clientSecret: config.googleClientIdSecret,
         callbackURL: `${config[process.env.NODE_ENV].url}/api/v1/auth/google/callback`,
         passReqToCallback   : true,
         proxy:true
@@ -45,7 +45,7 @@ module.exports = (passport) => {
         new JwtStrategy(
           {
             jwtFromRequest: ExtractJwt.fromHeader("authorization"),
-            secretOrKey: process.env.JWT_SECRET_KEY, 
+            secretOrKey: config.jwt_secret_key, 
           },
           async (jwtPayload, done) => {
             try {

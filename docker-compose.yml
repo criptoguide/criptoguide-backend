@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  map-rest-api:
+    container_name: map-rest-api
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    build:
+        context: ./ 
+    ports:
+     - "8080:8080"
+
+
+

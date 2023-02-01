@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const businessController = require("../controllers/businessController")
 const passport = require("passport");
-const { default: requireUser } = require("../../middleware/requireUser");
+const { default: requireUser } = require("../middleware/requireUser");
 
 
 router.get("/",  businessController.getAllBusinesses)

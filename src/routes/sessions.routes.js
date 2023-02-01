@@ -1,5 +1,5 @@
 const express = require("express");
-const { default: requireUser } = require("../../middleware/requireUser");
+const { default: requireUser } = require("../middleware/requireUser");
 const { getUserSessionsHandler, deleteSessionHandler, createUserSessionHandler, googleOAuthHandler } = require("../controllers/session.controller");
 const router = express.Router();
 

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-import requireUser from "../../middleware/requireUser";
+import requireUser from "../middleware/requireUser";
 import { createUserHandler, getCurrentUser } from "../controllers/user.controller";
 
 

@@ -1,7 +1,7 @@
 const moongose = require("mongoose");
 const { Schema } = moongose;
 import bcrypt from "bcrypt";
-import config from "../../config";
+import config from "../../../config/default";
 
 
 const UserSchema = new Schema(
