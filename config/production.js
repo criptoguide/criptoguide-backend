@@ -14,6 +14,9 @@ module.exports = {
     database_connection_string: process.env.DATABASE_URL,
      publicKey: process.env.PUBLIC_RSA_KEY,
      privateKey: process.env.PRIVATE_RSA_KEY,
+     googleClientId: process.env.CLIENT_ID,
+     googleClientIdSecret:process.env.CLIENT_SECRET,
+     jwt_secret_key: process.env.JWT_SECRET_KEY,
 
 
 }
