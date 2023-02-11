@@ -8,8 +8,6 @@ const requireUserAdmin = async (req, res, next) => {
 
     let userIsAdminOrNot = await User.findById(userAdmin);
 
-    console.log(userIsAdminOrNot.role);
-
     if (userIsAdminOrNot.role !== "admin") {
         return res.sendStatus(403);
     }

@@ -4,7 +4,10 @@ const passport = require("passport");
 require("../database/dbUsers/passportConfig")
 const router = express.Router();
 const User = require("../database/dbUsers/userModel");
-const userAdminController = require("../controllers/userAdminController")
+const userAdminController = require("../controllers/userAdminController");
+const businessController = require("../controllers/businessController");
+const { default: requireUserAdmin } = require("../middleware/requireUserAdmin");
+
 
 router.get("/listings", passport.authenticate("jwt", { session: false }), userAdminController.getUserAdminBusinesses);
 
@@ -28,6 +31,14 @@ router.put("/add", passport.authenticate("jwt", { session: false }),
 );
 
 
+/// USER ADMIN ROLE ROUTES
 
+
+router.get("/allbusinesses", requireUserAdmin,   businessController.getAllBusinesses)
+
+
+// BUSINESS PUBLISHED OR NOT
+
+router.get("/publish", requireUserAdmin,   businessController.getAllBusinesses)
 
 module.exports = router;

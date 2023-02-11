@@ -23,9 +23,26 @@ const getUserAdminBusinesses = async (req, res) => {
 
 }
 
+const publishBusiness = async (req, res) => {
+    console.log(req.query);
+    const { id } = req.query;
+    try {
+        userAdminService.publishBusiness(id);
+
+        res.send("BUSINESS PUBLISHED NOW")
+
+
+    } catch (e) {
+        res.status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } });
+    }
+
+}
+
 
 
 module.exports = {
     getUserAdminBusinesses,
-   
+    publishBusiness,
+
 }

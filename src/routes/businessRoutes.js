@@ -18,19 +18,7 @@ router.post("/create",requireUser,  businessController.createBusiness); // requi
 router.delete("/delete/:id", businessController.deleteBusiness); // required user
 
 
-//router.post("/business/exist", businessController.findBusinessById);
 
-router.get("/busi",requireUserAdmin,  async function(req, res){ 
-try {
-
-
-    res.send("OK you are an admin hehe")
-}catch(e){
-    res.status(403).send(e, 'error not authenticated admin');
-}
-   
-
-}); // required user
 
 module.exports = router;
 

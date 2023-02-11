@@ -14,8 +14,23 @@ const getUserAdminBusinesses = async (filterParams) => {
 
 }
 
+const publishBusiness = async (place_id) => {
+
+
+    try {
+        let res = await Business.findByIdAndUpdate(place_id, { published: true });
+
+        return res;
+    } catch (e) {
+        throw error;
+    }
+
+
+}
+
 
 module.exports = {
     getUserAdminBusinesses,
+    publishBusiness,
 
 }
