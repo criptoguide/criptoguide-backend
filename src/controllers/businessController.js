@@ -9,27 +9,19 @@ const findBusinessById = async (req, res) => {
  try {
 
      let id = req.body.id;
-
      let bs =  businessService.findBusinessById(id);
 
      if(bs){
         return true;
      }
 
-     
 
  }catch(e){
     res.status(200).send(false)
  }
 
 
-
-
-
-
-
 }
-
 
 const getAllBusinesses = async (req, res) => {
 
@@ -37,8 +29,6 @@ const getAllBusinesses = async (req, res) => {
 
     const acceptedLanguage = req.headers["accept-language"];
     const lang = parser.parse(acceptedLanguage);
-
-
 
     try {
         const allBusinesses = await businessService.getAllBusinesses({ location, country, lang, category });
@@ -79,11 +69,11 @@ const createBusiness = async (req, res) => {
         // !req.body.category || !req.body.address || !req.body.lat || !req.body.long || !req.body.poc || !req.body.description || id ??
 
 
-        // const businessExist = await Business.findById(place_id)
-        // if (businessExist){
-        //     console.log("ERROR ALREADY CREATED")
-        //     throw new Error("Business already created, please try another one")
-        // }
+        const businessExist = await Business.findOne({id: place_id});
+        if (businessExist){
+            console.log("ERROR ALREADY CREATED")
+            throw new Error("Business created already and might be awaiting for approval, please try another one")
+        }
         
 
         if (!name) {

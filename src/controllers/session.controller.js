@@ -96,8 +96,7 @@ export async function googleOAuthHandler(req, res) {
 
         // get id and access token with the code
         const { id_token, access_token } = await getGoogleOAuthTokens({ code });
-        console.log({ id_token, access_token });
-
+    
         // get user with tokens
         const googleUser = await getGoogleUser({ id_token, access_token });   //jwt.decode(id_token); other way to ge tthe user
 
@@ -123,11 +122,8 @@ export async function googleOAuthHandler(req, res) {
         console.log("user created/updated...")
 
         //create a session
-
         const session = await createSession(user._id, req.get("user-agent") || "");
-
         // create access and refresh token
-
         
         const accessToken = signJwt(
             {...user.toJSON(), session: session._id},

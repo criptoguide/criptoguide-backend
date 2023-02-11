@@ -39,6 +39,6 @@ router.get("/allbusinesses", requireUserAdmin,   businessController.getAllBusine
 
 // BUSINESS PUBLISHED OR NOT
 
-router.get("/publish", requireUserAdmin,   businessController.getAllBusinesses)
+router.put("/publish", requireUserAdmin,   userAdminController.publishBusiness)
 
 module.exports = router;

@@ -14,15 +14,14 @@ const getUserAdminBusinesses = async (filterParams) => {
 
 }
 
-const publishBusiness = async (place_id) => {
-
+const publishBusiness = async (place_id, value) => {
 
     try {
-        let res = await Business.findByIdAndUpdate(place_id, { published: true });
+        let res = await Business.findOneAndUpdate({ id: place_id }, { published: value });
 
         return res;
     } catch (e) {
-        throw error;
+        throw e;
     }
 
 

@@ -24,13 +24,11 @@ const getUserAdminBusinesses = async (req, res) => {
 }
 
 const publishBusiness = async (req, res) => {
-    console.log(req.query);
-    const { id } = req.query;
+    let id = req.body.place_id;
+    let value = req.body.value;
     try {
-        userAdminService.publishBusiness(id);
-
-        res.send("BUSINESS PUBLISHED NOW")
-
+        userAdminService.publishBusiness(id, value);
+        res.send({status: 'OK'});
 
     } catch (e) {
         res.status(error?.status || 500)
