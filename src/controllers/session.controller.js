@@ -113,6 +113,7 @@ export async function googleOAuthHandler(req, res) {
                 email: googleUser.email,
                 name: googleUser.name,
                 picture: googleUser.picture,
+       
             },
             {
                 upsert: true,

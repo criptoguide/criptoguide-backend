@@ -3,6 +3,19 @@ const BusinessDB = require("../database/business.js");
 
 
 
+const findBusinessById = async (id) => {
+    try {
+
+
+        const businessExist = await Business.find({ id: id });
+        if (businessExist.length > 0){
+            throw new Error("Business already created, please try another one")
+        }
+    }catch(e){
+        res.status(500).send({status: "FAILED", error: e})
+    }
+}
+
 
 const getAllBusinesses = async (filterParams) => {
 
@@ -60,6 +73,7 @@ const deleteBusiness =  (params) => {
 
 
 module.exports = {
+    findBusinessById,
     getAllBusinesses,
     getOwnBusiness,
     createBusiness,

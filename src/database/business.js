@@ -3,6 +3,10 @@ const Business = require("../database/dbBusiness/businessModel");
 const mongoose = require("mongoose");
 
 
+
+
+
+
 const getAllBusinesses = async (filterParams) => {
 
     try {
@@ -42,13 +46,20 @@ const createBusiness = (business) => {
         console.log('Creating new business...');
         const newBusiness = new Business({
             id: business.id,
+            name: business.name,
             formatted_address: business.formatted_address,
+            formatted_phone_number: business.formatted_phone_number,
+            published: business.published,
             geometry: business.geometry,
             place_id: business.place_id,
             poc: business.POC,
             types: business.types,
             url: business.url,
+            reviews: business.reviews,
+            rating:business.rating,
+            website:business.website,
             photos: business.photos,
+
 
         });
 

@@ -9,9 +9,13 @@ const BusinessSchema = new Schema({
   },
 
   formatted_address: { type: String },
+  formatted_phone_number: { type: String },
+  reviews: { type: [] },
+  rating: { type: Number },
+
   geometry: {
     location: [],
-    viewport: {type: Object}
+    viewport: { type: Object }
   },
   name: {
     type: String,
@@ -25,8 +29,9 @@ const BusinessSchema = new Schema({
   poc: {
     type: String,
     // required: true,
-  }
-
+  },
+  website: {type: String},
+  published: {type: Boolean}
 
 
 });

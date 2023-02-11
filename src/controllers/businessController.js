@@ -5,12 +5,38 @@ var parser = require('accept-language-parser');
 
 
 
+const findBusinessById = async (req, res) => {
+ try {
+
+     let id = req.body.id;
+
+     let bs =  businessService.findBusinessById(id);
+
+     if(bs){
+        return true;
+     }
+
+     
+
+ }catch(e){
+    res.status(200).send(false)
+ }
+
+
+
+
+
+
+
+}
+
+
 const getAllBusinesses = async (req, res) => {
 
     const { location, country, category } = req.query;
 
-const acceptedLanguage = req.headers["accept-language"];
-const lang = parser.parse(acceptedLanguage);
+    const acceptedLanguage = req.headers["accept-language"];
+    const lang = parser.parse(acceptedLanguage);
 
 
 
@@ -28,39 +54,48 @@ const lang = parser.parse(acceptedLanguage);
 }
 
 
-const getUserOwnBusiness = async (req, res)=> {
+const getUserOwnBusiness = async (req, res) => {
 
-  const ownerUserId = res.locals.user._id;
-  
+    const ownerUserId = res.locals.user._id;
 
-  const ownerBusinesess = await businessService.getOwnBusiness(ownerUserId);
- 
-  return res.send(ownerBusinesess);
+
+    const ownerBusinesess = await businessService.getOwnBusiness(ownerUserId);
+
+    return res.send(ownerBusinesess);
 
 }
 
 const createBusiness = async (req, res) => {
-    const { id, formatted_address, geometry, name, place_id, types, url, photos} = req.body
+    const { id, formatted_address, formatted_phone_number, reviews, rating, geometry, name, place_id, types, url, photos, website, published } = req.body
 
     console.log(req.user);
     //const POC = req.user._id.toString();
 
-
     const POC = res.locals.user._id.toString();
-console.log("POC", POC)
+
     try {
         //ADD MORE VALIDATIONS
 
         // !req.body.category || !req.body.address || !req.body.lat || !req.body.long || !req.body.poc || !req.body.description || id ??
 
-        if (!name ) {
-            throw new Error("missing data");
+
+        // const businessExist = await Business.findById(place_id)
+        // if (businessExist){
+        //     console.log("ERROR ALREADY CREATED")
+        //     throw new Error("Business already created, please try another one")
+        // }
+        
+
+        if (!name) {
+            throw new Error("Business name not found");
         };
-       // ADD MORE VALIDATIONS
+        // ADD MORE VALIDATIONS
+
+
 
         if (name != " ") {
-            await businessService.createBusiness({id, formatted_address, geometry, name, place_id, types, url, POC})
-            res.status(200).send({ status: "OK"})
+            await businessService.createBusiness({ id, name, formatted_address, geometry,website,  formatted_phone_number, reviews, rating, place_id, types, url,published,website,  POC, photos })
+            res.status(200).send({ status: "OK" })
         }
 
     } catch (error) {
@@ -77,11 +112,11 @@ const deleteBusiness = async (req, res) => {
         const id = req.params.id;
         const POC = req.user._id.toString();
 
-    await  businessService.deleteBusiness({ id, POC });
+        await businessService.deleteBusiness({ id, POC });
 
-       //res.status(200).send({ status: "OK" });
- 
-     
+        //res.status(200).send({ status: "OK" });
+
+
 
     } catch (error) {
         res.status(error?.status || 500)
@@ -94,6 +129,7 @@ const deleteBusiness = async (req, res) => {
 
 
 module.exports = {
+    findBusinessById,
     getAllBusinesses,
     getUserOwnBusiness,
     createBusiness,
