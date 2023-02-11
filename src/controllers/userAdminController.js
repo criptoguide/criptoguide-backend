@@ -37,10 +37,26 @@ const publishBusiness = async (req, res) => {
 
 }
 
+const deleteBusiness = async (req, res) => {
+    let id = req.params.id;
+
+    try {
+        userAdminService.deleteBusiness(id);
+        res.send({status: 'OK'});
+
+    } catch (e) {
+        res.status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } });
+    }
+
+}
+
+
 
 
 module.exports = {
     getUserAdminBusinesses,
     publishBusiness,
+    deleteBusiness
 
 }

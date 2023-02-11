@@ -27,9 +27,24 @@ const publishBusiness = async (place_id, value) => {
 
 }
 
+const deleteBusiness = async (place_id) => {
+
+    try {
+        let res = await Business.findOneAndDelete({ id: place_id });
+
+        return res;
+    } catch (e) {
+        throw e;
+    }
+
+
+}
+
+
 
 module.exports = {
     getUserAdminBusinesses,
     publishBusiness,
+    deleteBusiness,
 
 }

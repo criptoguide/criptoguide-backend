@@ -41,4 +41,6 @@ router.get("/allbusinesses", requireUserAdmin,   businessController.getAllBusine
 
 router.put("/publish", requireUserAdmin,   userAdminController.publishBusiness)
 
+router.delete("/publish/:id", requireUserAdmin,   userAdminController.deleteBusiness)
+
 module.exports = router;
