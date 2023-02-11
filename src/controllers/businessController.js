@@ -72,7 +72,7 @@ const createBusiness = async (req, res) => {
         const businessExist = await Business.findOne({id: place_id});
         if (businessExist){
             console.log("ERROR ALREADY CREATED")
-            throw new Error("Business created already and might be awaiting for approval, please try another one")
+            throw new Error("Error: Business was already created and might be awaiting for approval, please try another one")
         }
         
 
