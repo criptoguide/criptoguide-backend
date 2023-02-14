@@ -79,6 +79,7 @@ export async function deleteSessionHandler(req, res) {
         accessToken: null,
         refreshToken: null,
       });
+      console.log("SESSION CLSOED OK")
   return res.end();
 }
 

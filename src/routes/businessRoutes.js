@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const businessController = require("../controllers/businessController")
+const userAdminController = require("../controllers/userAdminController")
 const passport = require("passport");
 const { default: requireUser } = require("../middleware/requireUser");
 const { default: requireUserAdmin } = require("../middleware/requireUserAdmin");
@@ -15,7 +16,9 @@ router.get("/owner",requireUser,   businessController.getUserOwnBusiness); // re
 
 router.post("/create",requireUser,  businessController.createBusiness); // required user
 
-router.delete("/delete/:id", businessController.deleteBusiness); // required user
+router.delete("/delete/:id", requireUser,  userAdminController.deleteBusiness); // required user
+
+
 
 
 

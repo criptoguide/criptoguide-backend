@@ -34,13 +34,15 @@ router.put("/add", passport.authenticate("jwt", { session: false }),
 /// USER ADMIN ROLE ROUTES
 
 
-router.get("/allbusinesses", requireUserAdmin,   businessController.getAllBusinesses)
+router.get("/allbusinesses", requireUserAdmin,   businessController.getAllBusinessesForAdmin)
 
 
 // BUSINESS PUBLISHED OR NOT
 
 router.put("/publish", requireUserAdmin,   userAdminController.publishBusiness)
 
-router.delete("/publish/:id", requireUserAdmin,   userAdminController.deleteBusiness)
+
+// BUSINESS DELETE
+router.delete("/business/:id", requireUserAdmin,   userAdminController.deleteBusiness)
 
 module.exports = router;

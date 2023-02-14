@@ -32,7 +32,32 @@ const getAllBusinesses = async (req, res) => {
 
     try {
         const allBusinesses = await businessService.getAllBusinesses({ location, country, lang, category });
-        res.send({ status: "OK", data: allBusinesses });
+
+       const filteredByPublishedBusinesses = allBusinesses.filter((bs) => bs.published === true);
+        res.send(  filteredByPublishedBusinesses );
+        //   res.send({ status: "OK", data: allBusinesses });
+    }
+
+    catch (error) {
+        res.status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } });
+
+    }
+
+}
+
+const getAllBusinessesForAdmin = async (req, res) => {
+
+    const { location, country, category } = req.query;
+
+    const acceptedLanguage = req.headers["accept-language"];
+    const lang = parser.parse(acceptedLanguage);
+
+    try {
+        const allBusinesses = await businessService.getAllBusinesses({ location, country, lang, category });
+
+        res.send(  allBusinesses );
+        //   res.send({ status: "OK", data: allBusinesses });
     }
 
     catch (error) {
@@ -121,6 +146,7 @@ const deleteBusiness = async (req, res) => {
 module.exports = {
     findBusinessById,
     getAllBusinesses,
+    getAllBusinessesForAdmin,
     getUserOwnBusiness,
     createBusiness,
     deleteBusiness
