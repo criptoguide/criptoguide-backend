@@ -79,20 +79,27 @@ const getUserOwnBusiness = async (req, res) => {
     return res.send(ownerBusinesess);
 
 }
+let categoriesArray = ["locality", "political", "tourist_attraction", "route", "country", "natural_feature", "hospital", "university", "school", "premise", "neighborhood" ];
 
 const createBusiness = async (req, res) => {
     const { id, formatted_address, formatted_phone_number, reviews, rating, geometry, name, place_id, types, url, photos, website, published } = req.body
 
     console.log(req.user);
+    console.log(types);
     //const POC = req.user._id.toString();
+
 
     const POC = res.locals.user._id.toString();
 
     try {
         //ADD MORE VALIDATIONS
 
-        // !req.body.category || !req.body.address || !req.body.lat || !req.body.long || !req.body.poc || !req.body.description || id ??
 
+
+    if(types.some((type)=>  categoriesArray.includes(type) ) ) {
+        throw new Error("Sorry, we do not allow cities, locations or other type that is not a bussines in our map")
+
+    }
 
         const businessExist = await Business.findOne({id: place_id});
         if (businessExist){
