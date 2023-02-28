@@ -33,8 +33,8 @@ const v1UserAdminRoutes = require("./routes/userAdminRoutes");
 const v1SessionsRoutes = require("./routes/sessions.routes");
 
 
-app.get("/", (req, res)=> {
-   res.json("App working")
+app.get("/api/v1/", (req, res)=> {
+   res.json("Api on")
 
 });
 
