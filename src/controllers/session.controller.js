@@ -10,9 +10,9 @@ import config from "../../config/default";
 const accessTokenCookieOptions = {
     maxAge: 900000, // 15 mins
     httpOnly: true,
-    domain: "localhost",// SET TO CONFIG FOR PROD
+    domain: config.origin,// SET TO CONFIG FOR PROD
     path: "/",
-    sameSite: "strict", // strict in prod  lax in dev ? 
+    sameSite: config.cookieSamSite, // strict in prod  lax in dev ? 
     secure: config.cookieSecure, // env-dev =false) | env-prod = true
   };
   const refreshTokenCookieOptions = {
@@ -152,7 +152,7 @@ export async function googleOAuthHandler(req, res) {
 
     } catch (error) {
         console.log(error, "Failed to authorize Google user");
-        return res.redirect(`${config.origin}/oauth/error`);
+        return res.redirect(`${config.origin}/error`);
 
     }
 
