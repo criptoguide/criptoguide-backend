@@ -10,7 +10,7 @@ import config from "../../config/default";
 const accessTokenCookieOptions = {
     maxAge: 900000, // 15 mins
     httpOnly: true,
-    domain: config.origin,// SET TO CONFIG FOR PROD
+    domain: config.cookieDomain,// SET TO CONFIG FOR PROD
     path: "/",
     sameSite: config.cookieSamSite, // strict in prod  lax in dev ? 
     secure: config.cookieSecure, // env-dev =false) | env-prod = true
