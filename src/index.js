@@ -13,7 +13,7 @@ import deserializeUser from "./middleware/deserializeUser";
 
 app.use(
   cors({
-    origin: config.origin,
+    origin: config.CorsOrigin,
     credentials: true,
   })
   );

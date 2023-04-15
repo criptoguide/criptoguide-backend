@@ -8,6 +8,7 @@ module.exports = {
     refreshTokenTtl: process.env.REFRESH_TOKEN_LIMIT,
     saltWorkFactor: 10,//parseInt(process.env.SALT_WORK_FACTOR),
     cookieDomain: process.env.COOKIE_DOMAIN,
+    CorsOrigin:process.env.CORS_ORIGIN,
     cookieSamSite: process.env.COOKIE_SAMSITE,
     cookieSecure:process.env.COOKIE_SECURE,
     origin:  process.env.ORIGIN_URL,
