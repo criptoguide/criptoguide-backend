@@ -12,6 +12,7 @@ module.exports = {
     cookieSamSite: process.env.COOKIE_SAMSITE,
     cookieSecure:process.env.COOKIE_SECURE,
     origin:  process.env.ORIGIN_URL,
+    originPrefix:process.env.ORIGIN_URL_PREFIX,
     database_connection_string: process.env.DATABASE_URL,
      publicKey: process.env.PUBLIC_RSA_KEY,
      privateKey: process.env.PRIVATE_RSA_KEY,
