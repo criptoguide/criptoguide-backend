@@ -73,8 +73,8 @@ export async function deleteSessionHandler(req, res) {
     res.header('Expires', '-1');
     res.header('Pragma', 'no-cache');
 
-    res.clearCookie("accessToken", {  domain: config.cookieDomain})
-    res.clearCookie("refreshToken", {  domain: config.cookieDomain})
+    res.clearCookie("accessToken", {  domain: config.cookieDomain, path:'/'});
+    res.clearCookie("refreshToken", {  domain: config.cookieDomain, path:'/'});
     res.send({
         accessToken: null,
         refreshToken: null,
