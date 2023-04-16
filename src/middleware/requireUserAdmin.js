@@ -1,22 +1,16 @@
-import User from '../database/dbUsers/userModel';
-
-
+import User from "../database/dbUsers/userModel";
 
 const requireUserAdmin = async (req, res, next) => {
+  const userAdmin = res.locals.user._id;
+  if (!userAdmin) return;
 
+  let userIsAdminOrNot = await User.findById(userAdmin);
 
-    const userAdmin = res.locals.user._id;
+  if (userIsAdminOrNot.role !== "admin") {
+    return res.sendStatus(403);
+  }
 
-
-    let userIsAdminOrNot = await User.findById(userAdmin);
-
-    if (userIsAdminOrNot.role !== "admin") {
-        return res.sendStatus(403);
-    }
-
-
-
-    return next();
-}
+  return next();
+};
 
 export default requireUserAdmin;
