@@ -41,9 +41,7 @@ export async function createUserSessionHandler(req, res) {
     )
 
     // set a cookie 
-console.log("Sess", session);
-console.log("tokenss", accessToken);
-console.log("tokenss", refreshToken);
+
     res.cookie("accessToken", accessToken, accessTokenCookieOptions);
 
     res.cookie("refreshToken", refreshToken, refreshTokenCookieOptions);
@@ -145,9 +143,6 @@ export async function googleOAuthHandler(req, res) {
 
         res.cookie("refreshToken", refreshToken, refreshTokenCookieOptions);
 
-        console.log("Sess", session);
-        console.log("tokenss", accessToken);
-        console.log("tokenss", refreshToken);
         // redirect back to client
 
         //res.redirect(process.env.ORIGIN_URL);
