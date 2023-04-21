@@ -47,7 +47,7 @@ const createBusiness = (business) => {
         const newBusiness = new Business({
             id: business.id,
             name: business.name,
-            formatted_address: business.formatted_address,
+            formatted_address: business.formatted_address,            
             formatted_phone_number: business.formatted_phone_number,
             published: business.published,
             geometry: business.geometry,
@@ -59,6 +59,7 @@ const createBusiness = (business) => {
             rating:business.rating,
             website:business.website,
             photos: business.photos,
+            payment_methods: business.payment_methods,
 
 
         });

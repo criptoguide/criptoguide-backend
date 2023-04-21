@@ -9,6 +9,7 @@ const BusinessSchema = new Schema({
   },
 
   formatted_address: { type: String },
+  payment_methods: { type: [] },
   formatted_phone_number: { type: String },
   reviews: { type: [] },
   rating: { type: Number },
