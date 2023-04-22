@@ -13,7 +13,7 @@ import deserializeUser from "./middleware/deserializeUser";
 
 app.use(
   cors({
-    origin: [config.origin,config.originPrefix],
+    origin: [config.origin,"https://www.itellyouwhere.com"],
     credentials: true,
   })
   );
