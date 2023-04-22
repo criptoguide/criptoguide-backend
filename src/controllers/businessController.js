@@ -48,7 +48,7 @@ const getAllBusinessesForAdmin = async (req, res) => {
   const lang = parser.parse(acceptedLanguage);
 
   try {
-    const allBusinesses = await businessService.getAllBusinesses({
+    const allBusinesses = await businessService.getAllBusinessesForAdmin({
       location,
       country,
       lang,
@@ -198,7 +198,7 @@ const reportBusiness = async (req, res) => {
     await businessService.reportBusiness({ id, report });
 
 
-    res.status(200).send({ status: "OK" });
+    res.status(200).send({ status: "Thanks, Report has been submitted!" });
   } catch (error) {
     res
       .status(error?.status || 500)

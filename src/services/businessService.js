@@ -23,6 +23,16 @@ const getAllBusinesses = async (filterParams) => {
     }
   };
 
+  const getAllBusinessesForAdmin = async (filterParams) => {
+    try {
+      const allBusinesses = await Business.find({}).select('id formatted_address reports formatted_phone_number rating geometry name place_id types url photos  website published payment_methods');
+      //sending all and with reviews
+      return allBusinesses;
+    } catch (error) {
+      throw error;
+    }
+  };
+
 const getOwnBusiness = async (id) => {
   try {
     let ownerBusinesess = Business.find({ poc: id });
@@ -76,5 +86,6 @@ module.exports = {
   createBusiness,
   deleteBusiness,
   updateBusiness,
+  getAllBusinessesForAdmin,
   reportBusiness,
 };
