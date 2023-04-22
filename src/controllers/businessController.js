@@ -54,7 +54,7 @@ const getAllBusinessesForAdmin = async (req, res) => {
       lang,
       category,
     });
-   
+
     res.send(allBusinesses);
     //   res.send({ status: "OK", data: allBusinesses });
   } catch (error) {
@@ -102,7 +102,6 @@ const createBusiness = async (req, res) => {
     published,
     payment_methods,
   } = req.body;
-
 
   //const POC = req.user._id.toString();
 
@@ -173,20 +172,16 @@ const deleteBusiness = async (req, res) => {
   }
 };
 
-
-// UPDATE PAYMENT METHODS 
+// UPDATE PAYMENT METHODS
 const updateBusiness = async (req, res) => {
   try {
-    const {
-      id,
-      payment_methods,
-    } = req.body;
+    const { id, payment_methods } = req.body;
 
-const POC = res.locals.user._id.toString();
+    const POC = res.locals.user._id.toString();
 
     await businessService.updateBusiness({ id, POC, payment_methods });
 
-   res.status(200).send({ status: "OK" });
+    res.status(200).send({ status: "OK" });
   } catch (error) {
     res
       .status(error?.status || 500)
@@ -194,6 +189,22 @@ const POC = res.locals.user._id.toString();
   }
 };
 
+// SEND REPORT
+const reportBusiness = async (req, res) => {
+  try {
+    const { id, report } = req.body;
+
+    // const POC = res.locals.user._id.toString();
+    await businessService.reportBusiness({ id, report });
+
+
+    res.status(200).send({ status: "OK" });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
+};
 
 module.exports = {
   findBusinessById,
@@ -203,4 +214,5 @@ module.exports = {
   createBusiness,
   deleteBusiness,
   updateBusiness,
+  reportBusiness,
 };

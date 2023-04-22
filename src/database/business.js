@@ -115,7 +115,30 @@ const updateBusiness = async (params) => {
 }
 
 
+const reportBusiness = async (params) => {
+    try {
+
+        const query = { _id: params.id };
+        const update = { $push: { reports: params.report } };
+        Business.updateOne(query, update, (err, result) => {
+            if (err) {
+              console.log('Failed to create report:', err);
+              return;
+            }
+        
+            console.log('Report Created successfully');
+          });
+        
+
+    } catch (error) {
+        throw Error;
+    }
+}
 
 
 
-module.exports = { getAllBusinesses, createBusiness, deleteBusiness, updateBusiness }
+
+
+
+
+module.exports = { getAllBusinesses, createBusiness, deleteBusiness, updateBusiness, reportBusiness }

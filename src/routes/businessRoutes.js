@@ -15,6 +15,10 @@ router.post("/create", requireUser, businessController.createBusiness); // requi
 
 router.delete("/delete/:id", requireUser, userAdminController.deleteBusiness); // required user
 
+//update crypto payments
 router.put("/update/:id", requireUser, businessController.updateBusiness); // required user
+
+//sendReport
+router.post("/report/:id", businessController.reportBusiness); // required user
 
 module.exports = router;

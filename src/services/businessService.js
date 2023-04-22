@@ -58,6 +58,16 @@ const updateBusiness = (params) => {
       throw error;
     }
   };
+  
+  const reportBusiness = (params) => {
+    try {
+      BusinessDB.reportBusiness(params);
+    } catch (error) {
+      throw error;
+    }
+  };
+  
+
 
 module.exports = {
   findBusinessById,
@@ -66,4 +76,5 @@ module.exports = {
   createBusiness,
   deleteBusiness,
   updateBusiness,
+  reportBusiness,
 };
