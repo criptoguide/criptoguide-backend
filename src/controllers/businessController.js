@@ -54,7 +54,7 @@ const getAllBusinessesForAdmin = async (req, res) => {
       lang,
       category,
     });
-
+   
     res.send(allBusinesses);
     //   res.send({ status: "OK", data: allBusinesses });
   } catch (error) {
@@ -173,6 +173,28 @@ const deleteBusiness = async (req, res) => {
   }
 };
 
+
+// UPDATE PAYMENT METHODS 
+const updateBusiness = async (req, res) => {
+  try {
+    const {
+      id,
+      payment_methods,
+    } = req.body;
+
+const POC = res.locals.user._id.toString();
+
+    await businessService.updateBusiness({ id, POC, payment_methods });
+
+   res.status(200).send({ status: "OK" });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
+};
+
+
 module.exports = {
   findBusinessById,
   getAllBusinesses,
@@ -180,4 +202,5 @@ module.exports = {
   getUserOwnBusiness,
   createBusiness,
   deleteBusiness,
+  updateBusiness,
 };

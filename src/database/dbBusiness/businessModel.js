@@ -31,6 +31,7 @@ const BusinessSchema = new Schema({
     type: String,
     // required: true,
   },
+  reports: { type: [] },
   website: {type: String},
   published: {type: Boolean}
 

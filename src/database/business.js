@@ -93,4 +93,29 @@ const deleteBusiness = async (params) => {
     }
 }
 
-module.exports = { getAllBusinesses, createBusiness, deleteBusiness }
+
+const updateBusiness = async (params) => {
+    try {
+        Business.findById({ _id: params.id }, async function (error, bs) {
+            if (error) {
+                console.log(error)
+            } else if (bs.poc === params.POC) {
+                console.log('updating bs...');
+                Business.findOneAndUpdate({_id: params.id}, {$set: {payment_methods: params.payment_methods}}).exec().catch((err) => console.log(err));
+                // return console.log("successfuly  deleted");
+            } else {
+                return;
+            }
+        })
+
+
+    } catch (error) {
+        throw Error;
+    }
+}
+
+
+
+
+
+module.exports = { getAllBusinesses, createBusiness, deleteBusiness, updateBusiness }
