@@ -6,7 +6,7 @@ This repository contains the backend API for ITellYouWhere.com, an Interactive m
 
 ## Features
 
-- Provides API endpoints for accessing cryptocurrency data and information.
+- Provides API endpoints 
 - Supports user authentication and authorization.
 - Allows users to create accounts, add listings to the map
 
